@@ -29,20 +29,8 @@ public class SyUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-
-        findAll();
         buildMainLayout();
         setContent(mainLayout);
-    }
-
-    public void findAll() {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        try (Session session = sessionFactory.openSession()) {
-            Query query = session.createQuery("Select urun from Urun urun");
-            query.list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private void buildMainLayout() {

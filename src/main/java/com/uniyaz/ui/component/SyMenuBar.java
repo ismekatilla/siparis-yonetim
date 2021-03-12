@@ -1,6 +1,7 @@
 package com.uniyaz.ui.component;
 
 import com.uniyaz.ui.SyUI;
+import com.uniyaz.ui.page.UrunListePage;
 import com.uniyaz.ui.page.UrunPage;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.MenuBar;
@@ -36,7 +37,8 @@ public class SyMenuBar extends MenuBar {
         urunIslemleriMenuItem.addItem("Ürün Listele", FontAwesome.LIST, new Command() {
             @Override
             public void menuSelected(MenuItem menuItem) {
-
+                UrunListePage urunListePage = new UrunListePage();
+                contentComponent.addComponent(urunListePage);
             }
         });
     }
