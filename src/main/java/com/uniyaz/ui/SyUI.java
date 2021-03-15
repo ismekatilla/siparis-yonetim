@@ -1,6 +1,6 @@
 package com.uniyaz.ui;
 
-import com.uniyaz.core.utils.HibernateUtil;
+import com.uniyaz.core.domain.Musteri;
 import com.uniyaz.ui.component.ContentComponent;
 import com.uniyaz.ui.component.SyMenuBar;
 import com.uniyaz.ui.component.SearchComponent;
@@ -9,9 +9,6 @@ import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 
@@ -26,6 +23,7 @@ public class SyUI extends UI {
 
     private VerticalLayout mainLayout;
     private ContentComponent contentComponent;
+    private Musteri musteri;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -59,5 +57,13 @@ public class SyUI extends UI {
 
     public void setContentComponent(ContentComponent contentComponent) {
         this.contentComponent = contentComponent;
+    }
+
+    public Musteri getMusteri() {
+        return musteri;
+    }
+
+    public void setMusteri(Musteri musteri) {
+        this.musteri = musteri;
     }
 }

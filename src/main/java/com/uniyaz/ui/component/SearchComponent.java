@@ -26,6 +26,7 @@ public class SearchComponent extends HorizontalLayout {
         mainLayout = new HorizontalLayout();
 
         searchField = new TextField();
+        searchField.setId("searchField");
         searchField.setInputPrompt("Ürün Adı ve Kodunu giriniz");
         mainLayout.addComponent(searchField);
 

@@ -19,6 +19,16 @@ public class Musteri extends BaseEntity {
     @NotNull
     private String adi;
 
+    @Column(length = 10)
+    @Enumerated(EnumType.STRING)
+    private EnumCinsiyet cinsiyet;
+
+    @Transient
+    private String unvan;
+
+    @Column(length = 100)
+    private String adres;
+
     @Override
     public Long getId() {
         return id;
@@ -34,5 +44,27 @@ public class Musteri extends BaseEntity {
 
     public void setAdi(String adi) {
         this.adi = adi;
+    }
+
+    public EnumCinsiyet getCinsiyet() {
+        return cinsiyet;
+    }
+
+    public void setCinsiyet(EnumCinsiyet cinsiyet) {
+        this.cinsiyet = cinsiyet;
+    }
+
+    public String getUnvan() {
+        if (EnumCinsiyet.BAY.equals(cinsiyet)) return "Bay " + getAdi();
+        else if (EnumCinsiyet.BAYAN.equals(cinsiyet)) return "Bayan " + getAdi();
+        else return getAdi();
+    }
+
+    public String getAdres() {
+        return adres;
+    }
+
+    public void setAdres(String adres) {
+        this.adres = adres;
     }
 }

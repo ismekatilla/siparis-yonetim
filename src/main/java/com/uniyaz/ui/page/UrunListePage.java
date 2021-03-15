@@ -4,6 +4,7 @@ import com.uniyaz.core.domain.Urun;
 import com.uniyaz.core.service.UrunService;
 import com.uniyaz.ui.SyUI;
 import com.uniyaz.ui.component.ContentComponent;
+import com.uniyaz.ui.component.SyDeleteButton;
 import com.uniyaz.ui.component.SyEditButton;
 import com.vaadin.data.Container;
 import com.vaadin.data.Item;
@@ -51,7 +52,7 @@ public class UrunListePage extends VerticalLayout {
 
         buildContainer();
         table.setContainerDataSource(container);
-        table.setColumnHeaders("ID", "ADI", "KODU", "FİYAT", "");
+        table.setColumnHeaders("ID", "ADI", "KODU", "FİYAT", "", "");
     }
 
     private void buildContainer() {
@@ -62,12 +63,14 @@ public class UrunListePage extends VerticalLayout {
         container.addContainerProperty("kodu", String.class, null);
         container.addContainerProperty("fiyat", BigDecimal.class, null);
         container.addContainerProperty("guncelle", SyEditButton.class, null);
+        container.addContainerProperty("sil", Button.class, null);
     }
 
     private void fillTable() {
 
         UrunService urunService = new UrunService();
         List<Urun> urunList = urunService.findAllHql();
+        container.removeAllItems();
         for (Urun urun : urunList) {
             Item item = container.addItem(urun);
             item.getItemProperty("id").setValue(urun.getId());
@@ -75,19 +78,40 @@ public class UrunListePage extends VerticalLayout {
             item.getItemProperty("kodu").setValue(urun.getKodu());
             item.getItemProperty("fiyat").setValue(urun.getFiyat());
 
-            SyEditButton guncelle = new SyEditButton();
-            guncelle.addClickListener(new Button.ClickListener() {
-                @Override
-                public void buttonClick(Button.ClickEvent clickEvent) {
-
-                    SyUI syUI = (SyUI) SyUI.getCurrent();
-                    ContentComponent contentComponent = syUI.getContentComponent();
-
-                    UrunPage urunPage = new UrunPage(urun);
-                    contentComponent.addComponent(urunPage);
-                }
-            });
+            SyEditButton guncelle = buildEditButton(urun);
             item.getItemProperty("guncelle").setValue(guncelle);
+
+            SyDeleteButton sil = buildDeleteButton(urun);
+            item.getItemProperty("sil").setValue(sil);
         }
+    }
+
+    private SyEditButton buildEditButton(final Urun urun) {
+        SyEditButton guncelle = new SyEditButton();
+        guncelle.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent clickEvent) {
+
+                SyUI syUI = (SyUI) SyUI.getCurrent();
+                ContentComponent contentComponent = syUI.getContentComponent();
+
+                UrunPage urunPage = new UrunPage(urun);
+                contentComponent.addComponent(urunPage);
+            }
+        });
+        return guncelle;
+    }
+
+    private SyDeleteButton buildDeleteButton(final Urun urun) {
+        SyDeleteButton sil = new SyDeleteButton();
+        sil.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent clickEvent) {
+                UrunService urunService = new UrunService();
+                urunService.deleteUrun(urun);
+                fillTable();
+            }
+        });
+        return sil;
     }
 }

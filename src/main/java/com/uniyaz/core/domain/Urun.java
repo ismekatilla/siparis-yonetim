@@ -28,8 +28,6 @@ public class Urun extends BaseEntity {
     @Column(precision = 15, scale = 2)
     private BigDecimal fiyat;
 
-    private Musteri musteri;
-
     @Override
     public Long getId() {
         return id;

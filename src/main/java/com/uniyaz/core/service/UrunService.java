@@ -17,6 +17,10 @@ public class UrunService {
         urunDao.saveUrun(urun);
     }
 
+    public void deleteUrun(Urun urun) {
+        urunDao.deleteUrun(urun);
+    }
+
     private void validateSaveUrun(Urun urun) {
 
         if (!urun.getKodu().startsWith("U")) throw new RuntimeException("Ürün Kodu U ile başlamak zorunda");

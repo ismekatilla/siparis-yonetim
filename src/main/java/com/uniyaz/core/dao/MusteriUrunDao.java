@@ -1,52 +1,49 @@
 package com.uniyaz.core.dao;
 
-import com.uniyaz.core.domain.Urun;
-import com.uniyaz.core.dto.UrunDto;
-import com.uniyaz.core.dto.UrunDtoNative;
+import com.uniyaz.core.domain.MusteriUrun;
 import com.uniyaz.core.utils.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
-import org.hibernate.transform.Transformers;
 
 import java.util.List;
 
 /**
  * Created by AKARTAL on 12.3.2021.
  */
-public class UrunDao {
+public class MusteriUrunDao {
 
-    public void saveUrun(Urun urun) {
+    public void saveMusteriUrun(MusteriUrun musteriUrun) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.merge(urun);
+            session.merge(musteriUrun);
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void deleteUrun(Urun urun) {
+    public void saveMusteriUrun(List<MusteriUrun> musteriUrunList) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.delete(urun);
+            for (MusteriUrun musteriUrun : musteriUrunList) {
+                session.merge(musteriUrun);
+            }
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public List<Urun> findAByIdCriteria(Long id) {
+    public List<MusteriUrun> findAByIdCriteria(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
-            Criteria criteria = session.createCriteria(Urun.class);
+            Criteria criteria = session.createCriteria(MusteriUrun.class);
             criteria.add(Restrictions.eq("id", id));
             //criteria.add(Restrictions.like("kodu", "U", MatchMode.START));
             return criteria.list();
@@ -56,12 +53,14 @@ public class UrunDao {
         return null;
     }
 
-    public List<Urun> findAllHql() {
+    public List<MusteriUrun> findAllHql() {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             String hql =
-                    "Select     urunAlias " +
-                    "From       Urun urunAlias ";
+                    "Select     musteriUrun " +
+                    "From       MusteriUrun musteriUrun " +
+                    "Left Join Fetch musteriUrun.musteri musteri " +
+                    "Left Join Fetch musteriUrun.urun urun ";
             Query query = session.createQuery(hql);
             return query.list();
         } catch (Exception e) {
@@ -70,26 +69,18 @@ public class UrunDao {
         return null;
     }
 
-    public List<UrunDto> findAllHqlAliasToBean() {
+    public List<MusteriUrun> findAllByMusteriId(Long musteriId) {
+
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             String hql =
-                    "Select     urunAlias.id, urunAlias.kodu " +
-                    "From       Urun urunAlias ";
+                    "Select     musteriUrun " +
+                    "From       MusteriUrun musteriUrun " +
+                    "Left Join Fetch musteriUrun.musteri musteri " +
+                    "Left Join Fetch musteriUrun.urun urun " +
+                    "where      musteri.id = :musteriId ";
             Query query = session.createQuery(hql);
-            query.setResultTransformer(Transformers.aliasToBean(UrunDto.class));
-            return query.list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public List<UrunDtoNative> findAllNative() {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        try (Session session = sessionFactory.openSession()) {
-            NativeQuery sqlQuery = session.createSQLQuery("SELECT * FROM URUN");
-            Query query = sqlQuery.setResultTransformer(Transformers.aliasToBean(UrunDtoNative.class));
+            query.setParameter("musteriId", musteriId);
             return query.list();
         } catch (Exception e) {
             e.printStackTrace();

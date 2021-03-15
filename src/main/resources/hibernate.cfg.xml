@@ -16,5 +16,6 @@
 
         <mapping class="com.uniyaz.core.domain.Urun"></mapping>
         <mapping class="com.uniyaz.core.domain.Musteri"></mapping>
+        <mapping class="com.uniyaz.core.domain.MusteriUrun"></mapping>
     </session-factory>
 </hibernate-configuration>

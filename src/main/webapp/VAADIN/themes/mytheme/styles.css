@@ -12932,3 +12932,34 @@ div.v-layout.v-horizontal.v-widget {
 	width: 19px;
 	overflow: hidden;
 }
+
+.mytheme #searchField {
+	width: 400px;
+}
+
+.mytheme .v-menubar-syMenuBar {
+	width: 100%;
+	height: 100%;
+	background-color: #26881c;
+	background-image: none;
+	color: #FFF;
+	text-align: center;
+}
+
+.mytheme .v-menubar-syMenuBar .v-menubar-menuitem-caption {
+	font-size: 21px;
+	font-weight: bold;
+}
+
+.mytheme .urunKart .v-panel-captionwrap {
+	text-align: center;
+}
+
+.mytheme .urunKart .v-panel-content .v-verticallayout .v-slot {
+	text-align: center;
+}
+
+.mytheme .urunKart .v-panel-content .v-verticallayout .v-slot .v-image {
+	width: 150px;
+	height: 150px;
+}
