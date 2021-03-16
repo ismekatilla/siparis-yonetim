@@ -64,4 +64,48 @@
       }
     }
   }
+
+  .v-window-sywarning {
+    .v-window-outerheader {
+      background-color: red;
+    }
+
+    .v-icon {
+      color: white;
+      font-size: 27px;
+    }
+
+    .v-label {
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .v-window-header {
+      color: #FFF;
+      font-weight: 700;
+    }
+  }
+
+  .v-window-syinfo {
+    .v-window-outerheader {
+      background-color: yellow;
+    }
+
+    .v-icon {
+      color: darkblue;
+      font-size: 27px;
+    }
+
+    .v-label {
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .v-window-header {
+      color: darkblue;
+      font-weight: 700;
+    }
+  }
+
+
 }

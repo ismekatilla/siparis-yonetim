@@ -72,7 +72,7 @@ public class MusteriPage extends VerticalLayout {
 
                     Musteri musteri = musteriBeanItem.getBean();
                     MusteriService musteriService = new MusteriService();
-                    musteriService.saveMusteri(musteri);
+                    musteriService.save(musteri);
                 } catch (FieldGroup.CommitException e) {
                     Notification.show("Alanlar nesne ile uyumlu değil", Notification.Type.ERROR_MESSAGE);
                 } catch (Exception e) {

@@ -10,23 +10,17 @@ import java.util.List;
  * Created by AKARTAL on 12.3.2021.
  */
 @Transactional
-public class MusteriUrunService {
+public class MusteriUrunService extends BaseService<MusteriUrun, MusteriUrunDao> {
 
-    MusteriUrunDao musteriUrunDao = new MusteriUrunDao();
-
-    public void saveMusteriUrun(MusteriUrun musteriUrun) {
-        musteriUrunDao.saveMusteriUrun(musteriUrun);
+    public MusteriUrunService() {
+        super(MusteriUrunDao.class);
     }
 
     public void saveMusteriUrun(List<MusteriUrun> musteriUrunList) {
-        musteriUrunDao.saveMusteriUrun(musteriUrunList);
+        getDao().saveMusteriUrun(musteriUrunList);
     }
 
-    public List<MusteriUrun> findAllHql() {
-        return musteriUrunDao.findAllHql();
-    }
-
-    public List<MusteriUrun> findAllByMusteriId(Long musteriId) {
-        return musteriUrunDao.findAllByMusteriId(musteriId);
+    public List<MusteriUrun> findByMusteriId(Long musteriId) {
+        return getDao().findByMusteriId(musteriId);
     }
 }

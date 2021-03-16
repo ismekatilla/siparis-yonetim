@@ -1,32 +1,29 @@
 package com.uniyaz.core.service;
 
+import com.uniyaz.common.exceptions.SyException;
 import com.uniyaz.core.dao.UrunDao;
 import com.uniyaz.core.domain.Urun;
-
-import java.util.List;
 
 /**
  * Created by AKARTAL on 12.3.2021.
  */
-public class UrunService {
+public class UrunService extends BaseService<Urun, UrunDao> {
 
-    UrunDao urunDao = new UrunDao();
-
-    public void saveUrun(Urun urun) {
-        validateSaveUrun(urun);
-        urunDao.saveUrun(urun);
+    public UrunService() {
+        super(UrunDao.class);
     }
 
-    public void deleteUrun(Urun urun) {
-        urunDao.deleteUrun(urun);
+    @Override
+    public void save(Urun urun) {
+        validateSaveUrun(urun);
+        super.save(urun);
     }
 
     private void validateSaveUrun(Urun urun) {
 
-        if (!urun.getKodu().startsWith("U")) throw new RuntimeException("Ürün Kodu U ile başlamak zorunda");
-    }
-
-    public List<Urun> findAllHql() {
-        return urunDao.findAllHql();
+        if (!urun.getKodu().startsWith("U")) {
+            String message = "Ürün Kodu U ile başlamak zorunda";
+            throw new SyException(message, SyException.EnumExceptionType.WARNING);
+        }
     }
 }

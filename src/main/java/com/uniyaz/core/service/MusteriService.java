@@ -8,15 +8,9 @@ import java.util.List;
 /**
  * Created by AKARTAL on 12.3.2021.
  */
-public class MusteriService {
+public class MusteriService extends BaseService<Musteri, MusteriDao> {
 
-    MusteriDao musteriDao = new MusteriDao();
-
-    public void saveMusteri(Musteri musteri) {
-        musteriDao.saveMusteri(musteri);
-    }
-
-    public List<Musteri> findAllHql() {
-        return musteriDao.findAllHql();
+    public MusteriService() {
+        super(MusteriDao.class);
     }
 }

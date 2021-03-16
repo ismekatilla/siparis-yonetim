@@ -14,43 +14,9 @@ import java.util.List;
 /**
  * Created by AKARTAL on 12.3.2021.
  */
-public class MusteriDao {
+public class MusteriDao extends BaseDao<Musteri> {
 
-    public void saveMusteri(Musteri musteri) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
-            session.merge(musteri);
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public List<Musteri> findAByIdCriteria(Long id) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        try (Session session = sessionFactory.openSession()) {
-            Criteria criteria = session.createCriteria(Musteri.class);
-            criteria.add(Restrictions.eq("id", id));
-            //criteria.add(Restrictions.like("kodu", "U", MatchMode.START));
-            return criteria.list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public List<Musteri> findAllHql() {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        try (Session session = sessionFactory.openSession()) {
-            String hql =
-                    "Select     musteriAlias " +
-                    "From       Musteri musteriAlias ";
-            Query query = session.createQuery(hql);
-            return query.list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public MusteriDao() {
+        super(Musteri.class);
     }
 }

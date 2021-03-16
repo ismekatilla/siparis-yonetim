@@ -12963,3 +12963,41 @@ div.v-layout.v-horizontal.v-widget {
 	width: 150px;
 	height: 150px;
 }
+
+.mytheme .v-window-sywarning .v-window-outerheader {
+	background-color: red;
+}
+
+.mytheme .v-window-sywarning .v-icon {
+	color: white;
+	font-size: 27px;
+}
+
+.mytheme .v-window-sywarning .v-label {
+	font-size: 17px;
+	font-weight: 700;
+}
+
+.mytheme .v-window-sywarning .v-window-header {
+	color: #FFF;
+	font-weight: 700;
+}
+
+.mytheme .v-window-syinfo .v-window-outerheader {
+	background-color: yellow;
+}
+
+.mytheme .v-window-syinfo .v-icon {
+	color: darkblue;
+	font-size: 27px;
+}
+
+.mytheme .v-window-syinfo .v-label {
+	font-size: 17px;
+	font-weight: 700;
+}
+
+.mytheme .v-window-syinfo .v-window-header {
+	color: darkblue;
+	font-weight: 700;
+}

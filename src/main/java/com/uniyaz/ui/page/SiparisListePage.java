@@ -35,7 +35,7 @@ public class SiparisListePage extends BasePage {
 
     private void fillPageByMusteri(Musteri musteri) {
         MusteriUrunService musteriUrunService = new MusteriUrunService();
-        List<MusteriUrun> musteriUrunList = musteriUrunService.findAllByMusteriId(musteri.getId());
+        List<MusteriUrun> musteriUrunList = musteriUrunService.findByMusteriId(musteri.getId());
         fillTable(musteriUrunList);
     }
 

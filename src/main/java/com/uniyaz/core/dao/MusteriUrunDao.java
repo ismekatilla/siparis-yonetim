@@ -1,5 +1,6 @@
 package com.uniyaz.core.dao;
 
+import com.uniyaz.core.domain.Musteri;
 import com.uniyaz.core.domain.MusteriUrun;
 import com.uniyaz.core.utils.HibernateUtil;
 import org.hibernate.Criteria;
@@ -14,17 +15,10 @@ import java.util.List;
 /**
  * Created by AKARTAL on 12.3.2021.
  */
-public class MusteriUrunDao {
+public class MusteriUrunDao extends BaseDao<MusteriUrun> {
 
-    public void saveMusteriUrun(MusteriUrun musteriUrun) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
-            session.merge(musteriUrun);
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public MusteriUrunDao() {
+        super(MusteriUrun.class);
     }
 
     public void saveMusteriUrun(List<MusteriUrun> musteriUrunList) {
@@ -40,37 +34,7 @@ public class MusteriUrunDao {
         }
     }
 
-    public List<MusteriUrun> findAByIdCriteria(Long id) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        try (Session session = sessionFactory.openSession()) {
-            Criteria criteria = session.createCriteria(MusteriUrun.class);
-            criteria.add(Restrictions.eq("id", id));
-            //criteria.add(Restrictions.like("kodu", "U", MatchMode.START));
-            return criteria.list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public List<MusteriUrun> findAllHql() {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        try (Session session = sessionFactory.openSession()) {
-            String hql =
-                    "Select     musteriUrun " +
-                    "From       MusteriUrun musteriUrun " +
-                    "Left Join Fetch musteriUrun.musteri musteri " +
-                    "Left Join Fetch musteriUrun.urun urun ";
-            Query query = session.createQuery(hql);
-            return query.list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public List<MusteriUrun> findAllByMusteriId(Long musteriId) {
-
+    public List<MusteriUrun> findByMusteriId(Long musteriId) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             String hql =

@@ -47,7 +47,7 @@ public class SiparisPage extends VerticalLayout {
 
     private void fillPage() {
         UrunService urunService = new UrunService();
-        List<Urun> urunList = urunService.findAllHql();
+        List<Urun> urunList = urunService.findAll();
         urunKartList = new ArrayList<>();
         int i = 0;
         HorizontalLayout horizontalLayout = null;

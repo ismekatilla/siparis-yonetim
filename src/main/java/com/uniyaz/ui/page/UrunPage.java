@@ -1,5 +1,6 @@
 package com.uniyaz.ui.page;
 
+import com.uniyaz.common.exceptions.SyException;
 import com.uniyaz.core.domain.Urun;
 import com.uniyaz.core.service.UrunService;
 import com.uniyaz.ui.component.SySaveButton;
@@ -24,7 +25,7 @@ public class UrunPage extends VerticalLayout {
 
     @PropertyId("fiyat")
     private TextField fiyat;
-    
+
     private FormLayout mainLayout;
 
     private BeanItem<Urun> urunBeanItem;
@@ -34,7 +35,7 @@ public class UrunPage extends VerticalLayout {
     public UrunPage() {
         this(new Urun());
     }
-    
+
     public UrunPage(Urun urun) {
 
         setSizeFull();
@@ -48,15 +49,15 @@ public class UrunPage extends VerticalLayout {
     }
 
     private void buildMainLayout() {
-    
+
         mainLayout = new FormLayout();
         mainLayout.setSizeUndefined();
-        
+
         id = new TextField();
         id.setCaption("ID");
         id.setEnabled(false);
         mainLayout.addComponent(id);
-        
+
         adi = new TextField();
         adi.setCaption("Adı");
         mainLayout.addComponent(adi);
@@ -75,15 +76,13 @@ public class UrunPage extends VerticalLayout {
             public void buttonClick(Button.ClickEvent clickEvent) {
                 try {
                     binder.commit();
-
-                    Urun urun = urunBeanItem.getBean();
-                    UrunService urunService = new UrunService();
-                    urunService.saveUrun(urun);
                 } catch (FieldGroup.CommitException e) {
-                    Notification.show("Alanlar nesne ile uyumlu değil", Notification.Type.ERROR_MESSAGE);
-                } catch (Exception e) {
-                    Notification.show(e.getMessage(), Notification.Type.ERROR_MESSAGE);
+                    throw new SyException("Alanlar nesne ile uyumlu değil");
                 }
+
+                Urun urun = urunBeanItem.getBean();
+                UrunService urunService = new UrunService();
+                urunService.save(urun);
             }
         });
         mainLayout.addComponent(sySaveButton);

@@ -4,6 +4,7 @@ import com.uniyaz.core.domain.Urun;
 import com.uniyaz.core.dto.UrunDto;
 import com.uniyaz.core.dto.UrunDtoNative;
 import com.uniyaz.core.utils.HibernateUtil;
+import com.vaadin.ui.VerticalLayout;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,55 +20,10 @@ import java.util.List;
 /**
  * Created by AKARTAL on 12.3.2021.
  */
-public class UrunDao {
+public class UrunDao extends BaseDao<Urun> {
 
-    public void saveUrun(Urun urun) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
-            session.merge(urun);
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void deleteUrun(Urun urun) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
-            session.delete(urun);
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public List<Urun> findAByIdCriteria(Long id) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        try (Session session = sessionFactory.openSession()) {
-            Criteria criteria = session.createCriteria(Urun.class);
-            criteria.add(Restrictions.eq("id", id));
-            //criteria.add(Restrictions.like("kodu", "U", MatchMode.START));
-            return criteria.list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public List<Urun> findAllHql() {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        try (Session session = sessionFactory.openSession()) {
-            String hql =
-                    "Select     urunAlias " +
-                    "From       Urun urunAlias ";
-            Query query = session.createQuery(hql);
-            return query.list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public UrunDao() {
+        super(Urun.class);
     }
 
     public List<UrunDto> findAllHqlAliasToBean() {

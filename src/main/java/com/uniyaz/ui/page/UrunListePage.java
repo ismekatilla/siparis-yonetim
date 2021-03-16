@@ -69,7 +69,7 @@ public class UrunListePage extends VerticalLayout {
     private void fillTable() {
 
         UrunService urunService = new UrunService();
-        List<Urun> urunList = urunService.findAllHql();
+        List<Urun> urunList = urunService.findAll();
         container.removeAllItems();
         for (Urun urun : urunList) {
             Item item = container.addItem(urun);
@@ -108,7 +108,7 @@ public class UrunListePage extends VerticalLayout {
             @Override
             public void buttonClick(Button.ClickEvent clickEvent) {
                 UrunService urunService = new UrunService();
-                urunService.deleteUrun(urun);
+                urunService.delete(urun);
                 fillTable();
             }
         });

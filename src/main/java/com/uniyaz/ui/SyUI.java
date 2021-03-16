@@ -1,14 +1,19 @@
 package com.uniyaz.ui;
 
+import com.uniyaz.common.exceptions.SyException;
 import com.uniyaz.core.domain.Musteri;
 import com.uniyaz.ui.component.ContentComponent;
+import com.uniyaz.ui.component.ErrorWindow;
 import com.uniyaz.ui.component.SyMenuBar;
 import com.uniyaz.ui.component.SearchComponent;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
-import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.*;
+import com.vaadin.shared.ui.label.ContentMode;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 
@@ -29,6 +34,14 @@ public class SyUI extends UI {
     protected void init(VaadinRequest vaadinRequest) {
         buildMainLayout();
         setContent(mainLayout);
+
+        setErrorHandler(new ErrorHandler() {
+            @Override
+            public void error(com.vaadin.server.ErrorEvent errorEvent) {
+                ErrorWindow errorWindow = new ErrorWindow(errorEvent.getThrowable());
+                getCurrent().addWindow(errorWindow);
+            }
+        });
     }
 
     private void buildMainLayout() {

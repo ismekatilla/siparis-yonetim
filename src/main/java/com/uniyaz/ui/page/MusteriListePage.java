@@ -13,7 +13,6 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.window.WindowMode;
 import com.vaadin.ui.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -68,7 +67,7 @@ public class MusteriListePage extends VerticalLayout {
     private void fillTable() {
 
         MusteriService musteriService = new MusteriService();
-        List<Musteri> musteriList = musteriService.findAllHql();
+        List<Musteri> musteriList = musteriService.findAll();
         for (Musteri musteri : musteriList) {
             Item item = container.addItem(musteri);
             item.getItemProperty("id").setValue(musteri.getId());
