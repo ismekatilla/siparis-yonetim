@@ -24,16 +24,13 @@ public class SiparisListePage extends BasePage {
     private Container container;
 
     public SiparisListePage() {
-        SyUI syUI = (SyUI) SyUI.getCurrent();
-        Musteri musteri = syUI.getMusteri();
-        fillPageByMusteri(musteri);
     }
 
     public SiparisListePage(Musteri musteri) {
         fillPageByMusteri(musteri);
     }
 
-    private void fillPageByMusteri(Musteri musteri) {
+    public void fillPageByMusteri(Musteri musteri) {
         MusteriUrunService musteriUrunService = new MusteriUrunService();
         List<MusteriUrun> musteriUrunList = musteriUrunService.findByMusteriId(musteri.getId());
         fillTable(musteriUrunList);
@@ -71,6 +68,7 @@ public class SiparisListePage extends BasePage {
 
     private void fillTable(List<MusteriUrun> musteriUrunList) {
 
+        container.removeAllItems();
         for (MusteriUrun musteriUrun : musteriUrunList) {
             Item item = container.addItem(musteriUrun);
             item.getItemProperty("id").setValue(musteriUrun.getId());

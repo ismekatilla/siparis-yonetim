@@ -47,6 +47,7 @@ public class MusteriListePage extends VerticalLayout {
     private void buildTable() {
 
         table = new Table();
+        table.setSelectable(true);
 
         buildContainer();
         table.setContainerDataSource(container);
@@ -138,5 +139,9 @@ public class MusteriListePage extends VerticalLayout {
             }
         });
         return siparisButton;
+    }
+
+    public Table getTable() {
+        return table;
     }
 }

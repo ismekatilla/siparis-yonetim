@@ -12,7 +12,7 @@ public class MenuServiceTest {
     public void menuEkle() {
 
         Menu menu = new Menu();
-        menu.setBaslik("Sipariş İşlemleri");
+        menu.setBaslik("Container Sipraiş İşlemleri");
 
         MenuService menuService = new MenuService();
         menuService.save(menu);
@@ -31,11 +31,11 @@ public class MenuServiceTest {
     public void altMenuEkle() {
 
         MenuService menuService = new MenuService();
-        Menu ustMenu = menuService.findById(10L);
+        Menu ustMenu = menuService.findById(11L);
 
         Menu menu = new Menu();
-        menu.setBaslik("Listele");
-        menu.setClassPath(SiparisListePage.class.getName());
+        menu.setBaslik("Container");
+        menu.setClassPath(ContainerPage.class.getName());
         menu.setMenuUst(ustMenu);
 
         menuService.save(menu);

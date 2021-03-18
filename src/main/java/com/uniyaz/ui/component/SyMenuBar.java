@@ -3,8 +3,6 @@ package com.uniyaz.ui.component;
 import com.uniyaz.core.domain.Menu;
 import com.uniyaz.core.service.MenuService;
 import com.uniyaz.ui.SyUI;
-import com.uniyaz.ui.page.*;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.UI;

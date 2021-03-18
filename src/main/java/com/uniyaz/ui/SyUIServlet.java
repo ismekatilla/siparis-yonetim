@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * Created by AKARTAL on 12.3.2021.
  */
-@WebServlet(urlPatterns = "/*", name = "SyUIServlet", asyncSupported = true)
+@WebServlet(urlPatterns = "/*", name = "SyUIServlet", asyncSupported = true, loadOnStartup = 1)
 @VaadinServletConfiguration(ui = SyUI.class, productionMode = false)
 public class SyUIServlet extends VaadinServlet {
 }
